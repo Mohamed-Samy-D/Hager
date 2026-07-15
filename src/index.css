@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-rose: #E11D48;
+  --color-rose-light: #FB7185;
+  --color-rose-glow: #F43F5E;
+  --color-blush: #FFF1F2;
+  --color-cream: #FFFBFB;
+  --color-wine: #9F1239;
+  --color-gold: #D4A574;
+  --color-gold-light: #E8C9A0;
+  --color-charcoal: #1C1917;
+  --color-muted: #78716C;
+  --color-surface: #FEF2F2;
+
+  --font-display: "Playfair Display", "Amiri", serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-arabic: "Amiri", "Playfair Display", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  color: var(--color-charcoal);
+  background-color: var(--color-cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-rose-light);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-blush);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-rose-light);
+  border-radius: 3px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(225, 29, 72, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(225, 29, 72, 0.4); }
+}
