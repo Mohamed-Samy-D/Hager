@@ -1,5 +1,7 @@
 import { Heart } from "lucide-react";
 
+const BASE = import.meta.env.BASE_URL;
+
 export function Hero() {
   const scrollNext = () => {
     const html = document.documentElement;
@@ -27,7 +29,7 @@ export function Hero() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/0.mp4" type="video/mp4" />
+        <source src={`${BASE}0.mp4`} type="video/mp4" />
       </video>
 
       <div className="absolute inset-0 bg-charcoal/40" />

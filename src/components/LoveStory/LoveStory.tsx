@@ -7,6 +7,8 @@ import {
 } from "lucide-react";
 import { STORY_MILESTONES } from "../../lib/constants";
 
+const BASE = import.meta.env.BASE_URL;
+
 const ICONS = {
   sparkles: Sparkles,
   "message-circle": MessageCircle,
@@ -45,7 +47,7 @@ export function LoveStory() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/3.mp4" type="video/mp4" />
+        <source src={`${BASE}3.mp4`} type="video/mp4" />
       </video>
 
       <div className="absolute inset-0 bg-charcoal/30" />

@@ -1,5 +1,7 @@
 import { REASONS } from "../../lib/constants";
 
+const BASE = import.meta.env.BASE_URL;
+
 function ReasonCard({
   reason,
 }: {
@@ -26,7 +28,7 @@ export function Reasons() {
           <div className="w-full max-w-xs sm:max-w-sm lg:max-w-none mx-auto lg:mx-0">
             <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-black/40">
               <img
-                src="/photos/hager-5.png"
+                src={`${BASE}photos/hager-5.png`}
                 alt="Hager"
                 className="w-full h-full object-cover"
               />

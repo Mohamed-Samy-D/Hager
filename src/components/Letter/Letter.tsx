@@ -1,6 +1,8 @@
 import { Heart } from "lucide-react";
 import { LETTER_TEXT, LETTER_POETRY } from "../../lib/constants";
 
+const BASE = import.meta.env.BASE_URL;
+
 export function Letter() {
   const paragraphs = LETTER_TEXT.split("\n\n").filter(Boolean);
 
@@ -13,7 +15,7 @@ export function Letter() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/last.mp4" type="video/mp4" />
+        <source src={`${BASE}last.mp4`} type="video/mp4" />
       </video>
 
       <div className="absolute inset-0 bg-charcoal/40" />

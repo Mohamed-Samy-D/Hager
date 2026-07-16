@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Heart, Eye, EyeOff } from "lucide-react";
 
+const BASE = import.meta.env.BASE_URL;
+
 interface LoginPageProps {
   onLogin: () => void;
 }
@@ -33,7 +35,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/0.mp4" type="video/mp4" />
+        <source src={`${BASE}0.mp4`} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-charcoal/60 backdrop-blur-sm" />
 

@@ -1,3 +1,5 @@
+const BASE = import.meta.env.BASE_URL;
+
 export function About() {
   return (
     <section id="about" className="relative min-h-screen flex items-center overflow-hidden snap-start">
@@ -8,7 +10,7 @@ export function About() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/1.mp4" type="video/mp4" />
+        <source src={`${BASE}1.mp4`} type="video/mp4" />
       </video>
 
       <div className="absolute inset-0 bg-charcoal/40" />
@@ -18,7 +20,7 @@ export function About() {
           <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-none mx-auto md:mx-0">
             <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-black/40">
               <img
-                src="/photos/hager-1.jpeg"
+                src={`${BASE}photos/hager-1.jpeg`}
                 alt="Hager"
                 className="w-full h-full object-cover"
               />

@@ -2,10 +2,12 @@ import { useState } from "react";
 import { AnimatePresence } from "motion/react";
 import { X } from "lucide-react";
 
+const BASE = import.meta.env.BASE_URL;
+
 const PHOTOS = [
-  { id: 1, src: "/photos/hager-2.jpeg", alt: "Hager" },
-  { id: 2, src: "/photos/hager-3.png", alt: "Hager" },
-  { id: 3, src: "/photos/hager-4.png", alt: "Hager" },
+  { id: 1, src: `${BASE}photos/hager-2.jpeg`, alt: "Hager" },
+  { id: 2, src: `${BASE}photos/hager-3.png`, alt: "Hager" },
+  { id: 3, src: `${BASE}photos/hager-4.png`, alt: "Hager" },
 ];
 
 export function Gallery() {
@@ -26,7 +28,7 @@ export function Gallery() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/2.mp4" type="video/mp4" />
+        <source src={`${BASE}2.mp4`} type="video/mp4" />
       </video>
 
       <div className="absolute inset-0 bg-charcoal/40" />
