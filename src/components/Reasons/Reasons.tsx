@@ -1,61 +1,52 @@
-import { useRef } from "react";
-import { motion, useInView } from "motion/react";
 import { REASONS } from "../../lib/constants";
 
 function ReasonCard({
   reason,
-  index,
 }: {
   reason: (typeof REASONS)[number];
-  index: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
-
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="bg-white rounded-xl p-6 border border-rose/10 hover:border-rose/30 transition-all duration-300 hover:shadow-lg hover:shadow-rose/5 group"
-    >
-      <span className="text-3xl block mb-3">{reason.emoji}</span>
-      <p className="text-charcoal/80 text-sm leading-relaxed font-medium">
+    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-5 border border-white/15 hover:border-rose/40 transition-all duration-300">
+      <span className="text-2xl block mb-2">{reason.emoji}</span>
+      <p className="text-white/80 text-xs sm:text-sm leading-relaxed font-medium">
         {reason.text}
       </p>
-    </motion.div>
+    </div>
   );
 }
 
 export function Reasons() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="reasons" className="relative py-24 sm:py-32 bg-surface">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block text-rose-light text-sm font-medium tracking-widest uppercase mb-3">
-            From My Heart
-          </span>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-charcoal">
-            Why I <span className="text-rose">Love</span> You
-          </h2>
-          <p className="mt-4 text-muted max-w-lg mx-auto">
-            Nine reasons — though I could fill a thousand pages.
-          </p>
-        </motion.div>
+    <section id="reasons" className="relative min-h-screen flex items-center overflow-hidden snap-start">
+      <div className="absolute inset-0 bg-gradient-to-br from-charcoal via-wine/30 to-charcoal" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {REASONS.map((reason, i) => (
-            <ReasonCard key={i} reason={reason} index={i} />
-          ))}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 w-full">
+        <div className="flex flex-col lg:grid lg:grid-cols-[auto_1fr] gap-10 lg:gap-12 items-center">
+          {/* Photo */}
+          <div className="w-full max-w-xs sm:max-w-sm lg:max-w-none mx-auto lg:mx-0">
+            <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-black/40">
+              <img
+                src="/photos/hager-5.png"
+                alt="Hager"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Title + Cards */}
+          <div>
+            <div className="text-center lg:text-left mb-8 sm:mb-10">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+                Why I <span className="text-rose">Love</span> You
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+              {REASONS.map((reason, i) => (
+                <ReasonCard key={i} reason={reason} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,173 +1,66 @@
-import { useCallback, useEffect, useRef } from "react";
-import { motion } from "motion/react";
-import { ChevronDown } from "lucide-react";
-
-function HeartParticle({ delay }: { delay: number }) {
-  const size = 8 + Math.random() * 16;
-  const left = Math.random() * 100;
-  const duration = 8 + Math.random() * 12;
-
-  return (
-    <motion.div
-      className="absolute text-rose/20 pointer-events-none"
-      style={{ left: `${left}%`, fontSize: size }}
-      initial={{ bottom: -20, opacity: 0 }}
-      animate={{
-        bottom: "110%",
-        opacity: [0, 0.6, 0.6, 0],
-        x: [0, Math.random() * 60 - 30, Math.random() * 60 - 30, 0],
-      }}
-      transition={{
-        duration,
-        delay,
-        repeat: Infinity,
-        ease: "linear",
-      }}
-    >
-      ♥
-    </motion.div>
-  );
-}
+import { Heart } from "lucide-react";
 
 export function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animRef = useRef<number>(0);
-
-  const drawParticles = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles: { x: number; y: number; vx: number; vy: number; r: number; a: number }[] = [];
-    for (let i = 0; i < 50; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: -Math.random() * 0.3 - 0.1,
-        r: Math.random() * 2 + 0.5,
-        a: Math.random() * 0.3 + 0.1,
-      });
+  const scrollNext = () => {
+    const html = document.documentElement;
+    html.style.scrollSnapType = "none";
+    html.style.scrollBehavior = "auto";
+    const el = document.getElementById("about");
+    if (el) {
+      html.scrollTo({ top: el.offsetTop, behavior: "smooth" });
+      setTimeout(() => {
+        html.style.scrollSnapType = "";
+        html.style.scrollBehavior = "";
+      }, 800);
     }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (const p of particles) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(225, 29, 72, ${p.a})`;
-        ctx.fill();
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.y < -10) {
-          p.y = canvas.height + 10;
-          p.x = Math.random() * canvas.width;
-        }
-        if (p.x < -10) p.x = canvas.width + 10;
-        if (p.x > canvas.width + 10) p.x = -10;
-      }
-      animRef.current = requestAnimationFrame(animate);
-    };
-    animate();
-  }, []);
-
-  useEffect(() => {
-    drawParticles();
-    const handleResize = () => drawParticles();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      cancelAnimationFrame(animRef.current);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [drawParticles]);
-
-  const scrollToContent = () => {
-    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-cream via-blush to-cream"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden snap-start"
     >
-      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/0.mp4" type="video/mp4" />
+      </video>
 
-      {/* Floating hearts */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 15 }).map((_, i) => (
-          <HeartParticle key={i} delay={i * 0.8} />
-        ))}
-      </div>
+      <div className="absolute inset-0 bg-charcoal/40" />
 
-      {/* Decorative circles */}
-      <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-rose/5 blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-rose-light/5 blur-3xl" />
+      <div className="relative z-10 text-center px-4 max-w-3xl">
+        <Heart className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 text-rose fill-rose mx-auto mb-6 sm:mb-8" />
 
-      <div className="relative z-10 text-center px-4">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}
-            className="inline-block mb-6"
-          >
-            <span className="text-6xl" role="img" aria-label="heart">♥</span>
-          </motion.div>
-        </motion.div>
-
-        <motion.h1
-          initial={{ y: 40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-          className="font-display text-7xl sm:text-8xl md:text-9xl font-bold text-rose tracking-tight"
-          style={{ textShadow: "0 0 80px rgba(225, 29, 72, 0.15)" }}
+        <h1
+          className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-white tracking-tight leading-none"
+          style={{ textShadow: "0 0 120px rgba(225, 29, 72, 0.3)" }}
         >
           Hager
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.9, ease: "easeOut" }}
-          className="mt-4 font-display text-xl sm:text-2xl text-muted italic max-w-md mx-auto"
-        >
-          My heart belongs to you, always and forever
-        </motion.p>
+        <div className="h-0.5 bg-rose w-24 mx-auto my-4 sm:my-6" />
 
-        <motion.p
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.7, delay: 1.2, ease: "easeOut" }}
-          className="mt-2 font-arabic text-lg sm:text-xl text-rose-light/80"
-        >
-          قلبي لكِ دائماً وأبداً
-        </motion.p>
+        <p className="font-display text-base sm:text-xl md:text-2xl text-white/80 italic">
+          A love story told just for you
+        </p>
+
+        <p className="font-arabic text-sm sm:text-lg md:text-xl text-white/50 mt-2 sm:mt-3">
+          قصّة حبّ تُحكى لكِ وحدكِ
+        </p>
       </div>
 
-      <motion.button
-        onClick={scrollToContent}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 0.5 }}
-        className="absolute bottom-8 z-10 flex flex-col items-center gap-1 text-rose-light hover:text-rose transition-colors cursor-pointer"
-        aria-label="Scroll down"
+      <button
+        onClick={scrollNext}
+        className="absolute bottom-6 sm:bottom-10 z-10 flex flex-col items-center gap-2 text-white/50 hover:text-white transition-colors cursor-pointer"
+        aria-label="Next slide"
       >
-        <span className="text-xs font-medium tracking-wider uppercase">Discover</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronDown className="w-5 h-5" />
-        </motion.div>
-      </motion.button>
+        <span className="text-[10px] sm:text-xs font-medium tracking-[0.3em] uppercase">Begin</span>
+        <Heart className="w-4 h-4 sm:w-5 sm:h-5 animate-bounce" />
+      </button>
     </section>
   );
 }

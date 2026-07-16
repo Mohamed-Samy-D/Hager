@@ -57,15 +57,6 @@ export const REASONS = [
   { emoji: "🌺", text: "You are art that breathes" },
 ];
 
-export const GALLERY_IMAGES = [
-  { id: 1, alt: "Hager — a moment of joy", color: "#FECDD3" },
-  { id: 2, alt: "Hager — pure beauty", color: "#FED7AA" },
-  { id: 3, alt: "Hager — the light in my life", color: "#FEF3C7" },
-  { id: 4, alt: "Hager — my heart's home", color: "#D9F99D" },
-  { id: 5, alt: "Hager — unforgettable", color: "#C7D2FE" },
-  { id: 6, alt: "Hager — always in my thoughts", color: "#E9D5FF" },
-];
-
 export const LETTER_TEXT = `My Dearest Hager,
 
 There are a thousand ways to say "I love you," but none of them feel big enough for what you mean to me.
@@ -80,3 +71,15 @@ You are my favorite hello, my hardest goodbye, and everything in between.
 
 Forever and always,
 Yours ♥`;
+
+export const LETTER_POETRY = `بَانَتْ لَيَالِي الهَوَى وَالشَّوْقُ مَكْحُولُ   وَالقَلْبُ بَعْدَ فِرَاقِ الرِّيمِ مَخْبُولُ
+
+يَا هَاجَرُ الحُسْنِ رِفْقاً بِالفُؤَادِ فَقَدْ    أَضْحَى بِحُبِّكِ يَا شَمْسِي مَشْغُولُ
+
+تَرْنُو العُيُونُ إِلَى لُقْيَاكِ فِي شَغَفٍ ... وَالدَّمْعُ مِنْ لَوْعَةِ الأَشْوَاقِ مَهْمُولُ
+
+مَا كُنْتُ أَحْسَبُ أَنَّ البُعْدَ يُحْرِقُنِي ... حَتَّى رَأَيْتُ حِبَالَ وَصْلِكِ تَزُولُ
+
+إِنَّ الحَيَاةَ بِلا عَيْنَيْكِ مُظْلِمَةٌ ... وَالعُمْرُ دُونَ صَفَاءِ القُرْبِ مَمْلُولُ
+
+فَجُودِي بِالوَصْلِ يَا هَاجَرُ مُعْطِفَةً ... فَمَا لِقَلْبِي عَنِ الأَحْبَابِ تَحْوِيلُ`;

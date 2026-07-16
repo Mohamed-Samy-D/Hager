@@ -1,83 +1,59 @@
-import { useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "motion/react";
-import { Heart, Mail } from "lucide-react";
-import { LETTER_TEXT } from "../../lib/constants";
+import { Heart } from "lucide-react";
+import { LETTER_TEXT, LETTER_POETRY } from "../../lib/constants";
 
 export function Letter() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-  const revealWidth = useTransform(scrollYProgress, [0.1, 0.6], ["0%", "100%"]);
-
   const paragraphs = LETTER_TEXT.split("\n\n").filter(Boolean);
 
   return (
-    <section id="letter" className="relative py-24 sm:py-32 bg-cream overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-rose/3 blur-3xl pointer-events-none" />
+    <section id="letter" className="relative min-h-screen flex items-center overflow-hidden snap-start">
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/last.mp4" type="video/mp4" />
+      </video>
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-12"
-        >
-          <span className="inline-block text-rose-light text-sm font-medium tracking-widest uppercase mb-3">
-            Words From My Soul
-          </span>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-charcoal">
+      <div className="absolute inset-0 bg-charcoal/40" />
+
+      <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 py-16 sm:py-20 w-full">
+        <div className="text-center mb-8 sm:mb-10">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white">
             A <span className="text-rose">Letter</span> to You
           </h2>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="relative bg-white rounded-2xl p-8 sm:p-12 border border-rose/10 shadow-lg shadow-rose/5"
-        >
-          {/* Seal */}
-          <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-rose flex items-center justify-center shadow-md">
-            <Heart className="w-4 h-4 text-white fill-white" />
+        <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 md:p-10 border border-white/15">
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-rose flex items-center justify-center">
+            <Heart className="w-3 h-3 text-white fill-white" />
           </div>
 
-          {/* Letter icon */}
-          <div className="flex justify-center mb-6 pt-2">
-            <Mail className="w-6 h-6 text-rose-light/60" />
+          <div className="space-y-4 pt-2">
+            {paragraphs.map((para, i) => (
+              <p
+                key={i}
+                className={`font-display text-sm sm:text-base md:text-lg leading-relaxed ${
+                  i === 0 ? "text-white font-semibold text-base sm:text-lg md:text-xl" : "text-white/70"
+                } ${para.startsWith("Forever") ? "text-rose font-semibold italic" : ""}`}
+              >
+                {para}
+              </p>
+            ))}
           </div>
+        </div>
 
-          {/* Letter content with typewriter reveal */}
-          <div className="relative overflow-hidden">
-            <motion.div
-              className="absolute inset-0 bg-cream z-10"
-              style={{ width: revealWidth, right: 0, left: "auto" }}
-            />
-            <div className="space-y-5">
-              {paragraphs.map((para, i) => (
-                <p
-                  key={i}
-                  className={`font-display text-base sm:text-lg leading-relaxed ${
-                    i === 0
-                      ? "text-charcoal font-semibold text-xl"
-                      : "text-charcoal/80"
-                  } ${para.startsWith("Forever") ? "text-rose font-semibold italic" : ""}`}
-                >
-                  {para}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          {/* Decorative corner */}
-          <div className="absolute bottom-4 right-4 opacity-10">
-            <Heart className="w-24 h-24 text-rose fill-rose" />
-          </div>
-        </motion.div>
+        <div className="mt-6 bg-white/5 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-white/10">
+          {LETTER_POETRY.split("\n\n").map((verse, i) => (
+            <p
+              key={i}
+              className="font-arabic text-sm sm:text-base md:text-lg leading-loose text-center text-white/50"
+            >
+              {verse}
+            </p>
+          ))}
+        </div>
       </div>
     </section>
   );

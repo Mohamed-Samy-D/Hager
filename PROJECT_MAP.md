@@ -16,13 +16,13 @@ Fonts:       Google Fonts (Playfair Display + Inter + Amiri)
 
 ```
 index.html → main.tsx → App.tsx
-  ├── Navbar        — sticky nav, scroll spy, mobile hamburger
-  ├── Hero          — canvas particles, floating hearts, name reveal
-  ├── About         — photo placeholder + descriptive text
-  ├── Gallery       — masonry grid + lightbox modal
-  ├── LoveStory     — vertical timeline, scroll-triggered nodes
-  ├── Reasons       — staggered reason cards
-  ├── Letter        — scroll-reveal typewriter love letter
+  ├── Navbar        — sticky nav, scroll spy, dark cinematic style
+  ├── Hero          — 0.mp4 video bg + cinematic name reveal
+  ├── About         — 1.mp4 video bg + photo placeholder + text
+  ├── Gallery       — 2.mp4 video bg + photo grid + lightbox
+  ├── LoveStory     — 3.mp4 video bg + vertical timeline
+  ├── Reasons       — dark gradient bg + glassmorphism cards
+  ├── Letter        — last.mp4 video bg + love letter + Arabic poetry
   └── Footer        — canvas heart particles + credits
 ```
 
@@ -30,12 +30,13 @@ index.html → main.tsx → App.tsx
 
 ```
 Pattern:      Feature-based component folders (src/components/Name/Name.tsx)
+Layout:       Presentation-style with CSS scroll-snap (each section = full-screen slide)
 State:        Local (useState/useRef) — no global store
 Animation:    Declarative via Motion (scroll-triggered, spring, fade)
 Styling:      Utility-first (Tailwind 4) + CSS custom properties via @theme
-Routing:      None — single page, anchor links with smooth scroll
+Routing:      None — single page, scroll-snap navigation
 Data:         Static constants in src/lib/constants.ts
-Assets:       /public/images/ (user-provided photos)
+Assets:       /public/ (0.mp4, 1.mp4, 2.mp4, 3.mp4, last.mp4), /public/images/ (user photos)
 Hooks:        src/hooks/useScrollSpy.ts (IntersectionObserver-based)
 ```
 
@@ -77,7 +78,7 @@ npm run preview  # Preview production build
 - [ ] Update `About.tsx` photo section with actual image
 - [ ] Customize `STORY_MILESTONES` with real dates and events from your relationship
 - [ ] Customize `REASONS` with your personal reasons
-- [ ] Customize `LETTER_TEXT` with your own love letter
+- [x] Customize `LETTER_TEXT` with love letter + Arabic poetry
 - [ ] Adjust `NAV_LINKS` labels if needed
 - [ ] Add Open Graph meta tags for social sharing
 - [ ] Deploy to hosting (Vercel/Netlify/Cloudflare Pages)
